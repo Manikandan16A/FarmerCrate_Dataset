@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FarmerCrate - Pricing</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #e8f5e8 0%, #f0f8f0 100%);
+            color: #2d5016;
+            max-width: 414px;
+            margin: 0 auto;
+            min-height: 100vh;
+            position: relative;
+        }
+        
+        .status-bar {
+            background: #f8f8f8;
+            padding: 8px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 14px;
+            font-weight: 600;
+        }
+        
+        .header {
+            background: white;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .logo {
+            font-size: 20px;
+            font-weight: bold;
+            color: #4CAF50;
+        }
+        
+        .header-icons {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .icon-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #f0f8f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .welcome-card {
+            background: linear-gradient(135deg, #4CAF50 0%, #66BB6A 100%);
+            margin: 20px;
+            padding: 25px;
+            border-radius: 20px;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .welcome-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        
+        .update-btn {
+            background: rgba(255,255,255,0.2);
+            border: none;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 12px;
+            margin-bottom: 10px;
+        }
+        
+        .welcome-text {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+        
+        .profile-img {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 60px;
+            height: 60px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 15px;
+        }
+        
+        .tabs {
+            display: flex;
+            padding: 0 20px;
+            gap: 10px;
+            margin: 20px 0;
+        }
+        
+        .tab {
+            padding: 10px 20px;
+            border-radius: 25px;
+            border: 1px solid #4CAF50;
+            background: white;
+            color: #4CAF50;
+            font-size: 14px;
+            cursor: pointer;
+        }
+        
+        .tab.active {
+            background: #4CAF50;
+            color: white;
+        }
+        
+        .section {
+            margin: 20px;
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .section-icon {
+            width: 30px;
+            height: 30px;
+            background: #FF9800;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+        }
+        
+        .section-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #333;
+        }
+        
+        .price-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        
+        .price-item:last-child {
+            border-bottom: none;
+        }
+        
+        .item-info {
+            flex: 1;
+        }
+        
+        .item-name {
+            font-weight: 600;
+            color: #333;
+            font-size: 14px;
+        }
+        
+        .item-location {
+            color: #666;
+            font-size: 12px;
+            margin-top: 2px;
+        }
+        
+        .price-info {
+            text-align: right;
+        }
+        
+        .current-price {
+            color: #666;
+            font-size: 12px;
+            text-decoration: line-through;
+        }
+        
+        .new-price {
+            color: #4CAF50;
+            font-weight: bold;
+            font-size: 14px;
+        }
+        
+        .price-change {
+            font-size: 11px;
+            padding: 2px 6px;
+            border-radius: 10px;
+            margin-top: 2px;
+        }
+        
+        .increase {
+            background: #ffebee;
+            color: #d32f2f;
+        }
+        
+        .decrease {
+            background: #e8f5e8;
+            color: #2e7d32;
+        }
+        
+        .maintain {
+            background: #fff3e0;
+            color: #f57c00;
+        }
+        
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            max-width: 414px;
+            background: white;
+            padding: 10px 0;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .nav-items {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+        
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+            color: #666;
+            font-size: 12px;
+        }
+        
+        .nav-item.active {
+            color: #4CAF50;
+        }
+        
+        .nav-icon {
+            font-size: 20px;
+        }
+        
+        .content {
+            padding-bottom: 80px;
+        }
+    </style>
+</head>
+<body>
+    <div class="status-bar">
+        <span>11:33</span>
+        <span>📶 📶 📶 🔋 84%</span>
+    </div>
+    
+    <div class="header">
+        <div style="display: flex; align-items: center; gap: 15px;">
+            <button class="icon-btn">☰</button>
+            <div class="logo">FarmerCrate</div>
+        </div>
+        <div class="header-icons">
+            <button class="icon-btn">🔍</button>
+            <button class="icon-btn">🔄</button>
+            <button class="icon-btn">🛒</button>
+        </div>
+    </div>
+    
+    <div class="content">
+        <div class="welcome-card">
+            <div class="welcome-title">Smart Pricing Dashboard</div>
+            <button class="update-btn">✨ Update Prices</button>
+            <div class="welcome-text">Keep your pricing fresh & up-to-date</div>
+            <div class="profile-img"></div>
+        </div>
+        
+        <div class="tabs">
+            <div class="tab active">All</div>
+            <div class="tab">Location</div>
+            <div class="tab">Demand</div>
+            <div class="tab">Trends</div>
+        </div>
+        
+        <div class="section">
+            <div class="section-header">
+                <div class="section-icon">📍</div>
+                <div class="section-title">Location-Based Pricing</div>
+            </div>
+            
+            <div class="price-item">
+                <div class="item-info">
+                    <div class="item-name">Tomatoes</div>
+                    <div class="item-location">Mumbai Urban</div>
+                </div>
+                <div class="price-info">
+                    <div class="current-price">₹50.00</div>
+                    <div class="new-price">₹57.50</div>
+                    <div class="price-change increase">+15%</div>
+                </div>
+            </div>
+            
+            <div class="price-item">
+                <div class="item-info">
+                    <div class="item-name">Potatoes</div>
+                    <div class="item-location">Rural Punjab</div>
+                </div>
+                <div class="price-info">
+                    <div class="current-price">₹30.00</div>
+                    <div class="new-price">₹27.00</div>
+                    <div class="price-change decrease">-10%</div>
+                </div>
+            </div>
+            
+            <div class="price-item">
+                <div class="item-info">
+                    <div class="item-name">Onions</div>
+                    <div class="item-location">Surat City</div>
+                </div>
+                <div class="price-info">
+                    <div class="current-price">₹40.00</div>
+                    <div class="new-price">₹46.00</div>
+                    <div class="price-change increase">+15%</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <div class="section-header">
+                <div class="section-icon" style="background: #9C27B0;">📊</div>
+                <div class="section-title">Demand-Based Predictions</div>
+            </div>
+            
+            <div class="price-item">
+                <div class="item-info">
+                    <div class="item-name">Tomatoes</div>
+                    <div class="item-location">Rural Punjab • High Demand</div>
+                </div>
+                <div class="price-info">
+                    <div class="current-price">₹45.00</div>
+                    <div class="new-price">₹64.12</div>
+                    <div class="price-change increase">+42%</div>
+                </div>
+            </div>
+            
+            <div class="price-item">
+                <div class="item-info">
+                    <div class="item-name">Potatoes</div>
+                    <div class="item-location">Mumbai Urban • Low Demand</div>
+                </div>
+                <div class="price-info">
+                    <div class="current-price">₹30.00</div>
+                    <div class="new-price">₹27.60</div>
+                    <div class="price-change decrease">-8%</div>
+                </div>
+            </div>
+            
+            <div class="price-item">
+                <div class="item-info">
+                    <div class="item-name">Carrots</div>
+                    <div class="item-location">Village Bihar • Peak Season</div>
+                </div>
+                <div class="price-info">
+                    <div class="current-price">₹35.00</div>
+                    <div class="new-price">₹39.90</div>
+                    <div class="price-change increase">+14%</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="bottom-nav">
+        <div class="nav-items">
+            <div class="nav-item active">
+                <div class="nav-icon">🏠</div>
+                <div>Home</div>
+            </div>
+            <div class="nav-item">
+                <div class="nav-icon">📊</div>
+                <div>Analytics</div>
+            </div>
+            <div class="nav-item">
+                <div class="nav-icon">🛒</div>
+                <div>Cart</div>
+            </div>
+            <div class="nav-item">
+                <div class="nav-icon">❓</div>
+                <div>FAQ</div>
+            </div>
+            <div class="nav-item">
+                <div class="nav-icon">👤</div>
+                <div>Profile</div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

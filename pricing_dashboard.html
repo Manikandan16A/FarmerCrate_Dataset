@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FarmerCrate - Pricing Dashboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #e8f5e8 0%, #f0f8f0 100%);
+            color: #2d5016;
+            min-height: 100vh;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #4CAF50 0%, #66BB6A 100%);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(76, 175, 80, 0.3);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 0 20px;
+        }
+        
+        .pricing-section {
+            background: white;
+            border-radius: 15px;
+            margin: 20px 0;
+            padding: 25px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            border: 2px solid #e8f5e8;
+        }
+        
+        .section-title {
+            color: #4CAF50;
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .icon {
+            width: 30px;
+            height: 30px;
+            background: #4CAF50;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+        
+        .table-container {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+        
+        table {
+            width: 100%;
+            min-width: 800px;
+            border-collapse: collapse;
+            margin-top: 15px;
+            font-size: 14px;
+        }
+        
+        th {
+            background: linear-gradient(135deg, #4CAF50 0%, #66BB6A 100%);
+            color: white;
+            padding: 12px 8px;
+            text-align: left;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+        
+        td {
+            padding: 10px 8px;
+            border-bottom: 1px solid #e8f5e8;
+            white-space: nowrap;
+        }
+        
+        tr:nth-child(even) {
+            background: #f8fdf8;
+        }
+        
+        tr:hover {
+            background: #e8f5e8;
+            transition: all 0.3s ease;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 10px;
+            }
+            
+            .pricing-section {
+                padding: 15px;
+                margin: 10px 0;
+            }
+            
+            table {
+                font-size: 12px;
+            }
+            
+            th, td {
+                padding: 8px 6px;
+            }
+        }
+        
+        .price {
+            font-weight: bold;
+            color: #2e7d32;
+        }
+        
+        .increase {
+            color: #d32f2f;
+            font-weight: bold;
+        }
+        
+        .decrease {
+            color: #388e3c;
+            font-weight: bold;
+        }
+        
+        .maintain {
+            color: #f57c00;
+            font-weight: bold;
+        }
+        
+        .demand-high {
+            background: #ffebee;
+            color: #c62828;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        
+        .demand-low {
+            background: #e8f5e8;
+            color: #2e7d32;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        
+        .legend {
+            background: #f8fdf8;
+            border-radius: 10px;
+            padding: 15px;
+            margin-top: 20px;
+            border-left: 4px solid #4CAF50;
+        }
+        
+        .legend h4 {
+            color: #4CAF50;
+            margin-bottom: 10px;
+        }
+        
+        .legend ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .legend li {
+            margin: 5px 0;
+            color: #2d5016;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>FarmerCrate</h1>
+    </div>
+    
+    <div class="container">
+        <!-- Location-Based Pricing -->
+        <div class="pricing-section">
+            <div class="section-title">
+                <div class="icon">📍</div>
+                Location-Based Pricing
+            </div>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Farmer</th>
+                            <th>Product</th>
+                            <th>Zone</th>
+                            <th>Base Price</th>
+                            <th>Multiplier</th>
+                            <th>Recommended</th>
+                            <th>Calculation</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Rajesh Kumar</td>
+                            <td>Tomatoes</td>
+                            <td>Mumbai Urban</td>
+                            <td class="price">$50.00</td>
+                            <td>1.15</td>
+                            <td class="price">$57.50</td>
+                            <td>$50.00 × 1.15</td>
+                        </tr>
+                        <tr>
+                            <td>Priya Sharma</td>
+                            <td>Potatoes</td>
+                            <td>Rural Punjab</td>
+                            <td class="price">$30.00</td>
+                            <td>0.90</td>
+                            <td class="price">$27.00</td>
+                            <td>$30.00 × 0.90</td>
+                        </tr>
+                        <tr>
+                            <td>Amit Patel</td>
+                            <td>Onions</td>
+                            <td>Surat City</td>
+                            <td class="price">$40.00</td>
+                            <td>1.15</td>
+                            <td class="price">$46.00</td>
+                            <td>$40.00 × 1.15</td>
+                        </tr>
+                        <tr>
+                            <td>Sunita Devi</td>
+                            <td>Carrots</td>
+                            <td>Village Bihar</td>
+                            <td class="price">$35.00</td>
+                            <td>0.90</td>
+                            <td class="price">$31.50</td>
+                            <td>$35.00 × 0.90</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="legend">
+                <h4>Location Pricing Logic:</h4>
+                <ul>
+                    <li>• Urban/City zones: Base Price × 1.15 (+15% markup)</li>
+                    <li>• Rural/Village zones: Base Price × 0.90 (-10% discount)</li>
+                    <li>• Other zones: Base Price × 1.05 (+5% standard markup)</li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- Demand-Based Pricing -->
+        <div class="pricing-section">
+            <div class="section-title">
+                <div class="icon">📊</div>
+                Demand-Based Price Prediction
+            </div>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Product</th>
+                            <th>Location</th>
+                            <th>Current Price</th>
+                            <th>Predicted Price</th>
+                            <th>Change %</th>
+                            <th>Demand</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Tomatoes</td>
+                            <td>Mumbai Urban</td>
+                            <td class="price">$50.00</td>
+                            <td class="price">$51.75</td>
+                            <td>+3.5%</td>
+                            <td><span class="demand-low">Low</span></td>
+                            <td class="maintain">MAINTAIN</td>
+                        </tr>
+                        <tr>
+                            <td>Tomatoes</td>
+                            <td>Rural Punjab</td>
+                            <td class="price">$45.00</td>
+                            <td class="price">$64.12</td>
+                            <td class="increase">+42.5%</td>
+                            <td><span class="demand-high">High</span></td>
+                            <td class="increase">INCREASE</td>
+                        </tr>
+                        <tr>
+                            <td>Potatoes</td>
+                            <td>Mumbai Urban</td>
+                            <td class="price">$30.00</td>
+                            <td class="price">$27.60</td>
+                            <td class="decrease">-8.0%</td>
+                            <td><span class="demand-low">Low</span></td>
+                            <td class="maintain">MAINTAIN</td>
+                        </tr>
+                        <tr>
+                            <td>Potatoes</td>
+                            <td>Rural Punjab</td>
+                            <td class="price">$25.00</td>
+                            <td class="price">$28.50</td>
+                            <td class="increase">+14.0%</td>
+                            <td><span class="demand-high">High</span></td>
+                            <td class="increase">INCREASE</td>
+                        </tr>
+                        <tr>
+                            <td>Onions</td>
+                            <td>Surat City</td>
+                            <td class="price">$40.00</td>
+                            <td class="price">$36.80</td>
+                            <td class="decrease">-8.0%</td>
+                            <td><span class="demand-low">Low</span></td>
+                            <td class="maintain">MAINTAIN</td>
+                        </tr>
+                        <tr>
+                            <td>Carrots</td>
+                            <td>Village Bihar</td>
+                            <td class="price">$35.00</td>
+                            <td class="price">$39.90</td>
+                            <td class="increase">+14.0%</td>
+                            <td><span class="demand-low">Low</span></td>
+                            <td class="increase">INCREASE</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="legend">
+                <h4>Demand Prediction Factors:</h4>
+                <ul>
+                    <li>• High demand locations → Price increase recommended</li>
+                    <li>• Peak season → 20% markup, Low season → 20% discount</li>
+                    <li>• Urban areas → 15% premium, Rural areas → 5% discount</li>
+                    <li>• Algorithm: Multi-Factor Weighted Scoring with Demand Elasticity</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
